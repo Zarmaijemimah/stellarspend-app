@@ -15,7 +15,21 @@ Key Features
 🌐 Multilingual: English, Spanish, French, Swahili, Portuguese, Arabic
 🤝 Community-Driven: Built with transparency and user feedback
 
+Contributing
 
+We welcome contributions!
+
+Fork the repository
+
+Create a branch: git checkout -b feature/short-description
+
+Implement changes and add tests where applicable
+
+Run linters and tests locally
+
+Open a clear Pull Request describing the changes
+
+Look for issues labeled good first issue or help wanted.
 🚀 Quick Start
 Prerequisites
 bashNode.js 18+
@@ -89,18 +103,7 @@ Freighter API for wallet connection
 Albedo SDK for alternative wallet
 Soroban RPC client for smart contracts
 
-Offline Support
 
-Service Workers for offline caching
-IndexedDB for local data persistence
-Background sync for transaction updates
-
-Performance
-
-Next.js Image Optimization
-Dynamic imports and code splitting
-Bundle analyzer for size monitoring
-Lighthouse CI for performance tracking
 
 
 
@@ -114,15 +117,5 @@ Lighthouse CI for performance tracking
       - name: Build
         run: npm run build
       
-      - name: Deploy to Vercel
-        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
 
-🤝 Contributing
-We welcome contributions from developers worldwide!
-Getting Started
 
-Fork the repository
-
-bash   # Click "Fork" on GitHub
-
-**
