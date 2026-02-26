@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root {
+  --color-brand: #7c3aed;
+  --color-brand-light: #a78bfa;
+  --color-accent: #22d3ee;
+  --color-surface: #0d1117;
+  --color-bg: #080b18;
+  --font-sans: var(--font-geist-sans), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), "Fira Code", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: #f1f5f9;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
