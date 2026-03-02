@@ -9,6 +9,7 @@ export interface CardProps {
 export interface CardHeaderProps {
   children: React.ReactNode;
   className?: string;
+  noBorder?: boolean;
 }
 
 export interface CardBodyProps {
@@ -19,25 +20,44 @@ export interface CardBodyProps {
 export interface CardFooterProps {
   children: React.ReactNode;
   className?: string;
+  noBorder?: boolean;
 }
 
 const variantStyles = {
-  default: 'bg-white border border-gray-200',
-  outlined: 'bg-transparent border-2 border-gray-300',
-  elevated: 'bg-white shadow-lg border-0',
+  default: 'bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700',
+  outlined: 'bg-transparent border-2 border-gray-300 dark:border-gray-600',
+  elevated: 'bg-white dark:bg-gray-800 shadow-lg border-0',
 };
 
 export function Card({ children, className = '', variant = 'default' }: CardProps) {
+  const childArray = React.Children.toArray(children);
+  const hasHeader = childArray.some(child => React.isValidElement(child) && child.type === CardHeader);
+  const hasFooter = childArray.some(child => React.isValidElement(child) && child.type === CardFooter);
+
   return (
     <div className={`rounded-lg ${variantStyles[variant]} ${className}`}>
-      {children}
+      {React.Children.map(children, child => {
+        if (React.isValidElement(child)) {
+          if (child.type === CardHeader) {
+            return React.cloneElement(child as React.ReactElement<CardHeaderProps>, { 
+              noBorder: !hasFooter && childArray[childArray.length - 1] === child 
+            });
+          }
+          if (child.type === CardFooter) {
+            return React.cloneElement(child as React.ReactElement<CardFooterProps>, { 
+              noBorder: !hasHeader && childArray[0] === child 
+            });
+          }
+        }
+        return child;
+      })}
     </div>
   );
 }
 
-export function CardHeader({ children, className = '' }: CardHeaderProps) {
+export function CardHeader({ children, className = '', noBorder = false }: CardHeaderProps) {
   return (
-    <div className={`px-6 py-4 border-b border-gray-200 ${className}`}>
+    <div className={`px-6 py-4 ${!noBorder ? 'border-b border-gray-200 dark:border-gray-700' : ''} ${className}`}>
       {children}
     </div>
   );
@@ -51,9 +71,9 @@ export function CardBody({ children, className = '' }: CardBodyProps) {
   );
 }
 
-export function CardFooter({ children, className = '' }: CardFooterProps) {
+export function CardFooter({ children, className = '', noBorder = false }: CardFooterProps) {
   return (
-    <div className={`px-6 py-4 border-t border-gray-200 ${className}`}>
+    <div className={`px-6 py-4 ${!noBorder ? 'border-t border-gray-200 dark:border-gray-700' : ''} ${className}`}>
       {children}
     </div>
   );
